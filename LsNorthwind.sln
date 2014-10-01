@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{581633EB-B896-402F-8E60-36F3DA191C85}") = "LsNorthwind", "LsNorthwind\LsNorthwind.lsxtproj", "{60AC5910-244A-4C78-BAFB-839119E83778}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LsNorthwind.Server", "LsNorthwind\LsNorthwind.Server\LsNorthwind.Server.csproj", "{0D61E6DE-FC10-4EB7-8D1A-6538C3D247A1}"
+EndProject
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "LsNorthwind.HTMLClient", "LsNorthwind\LsNorthwind.HTMLClient\LsNorthwind.HTMLClient.jsproj", "{EC33DEF5-2A46-4185-8229-0D14F0034364}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LsNorthwind.AdminClient", "LsNorthwind\LsNorthwind.AdminClient\LsNorthwind.AdminClient.csproj", "{5C428B16-98E2-4C0D-9021-5500A64405BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{9981D9D1-07F0-4A08-824C-EF6FC40BC92A}"
+	ProjectSection(SolutionItems) = preProject
+		manual.roles.sql = manual.roles.sql
+		manual.storeproc.sql = manual.storeproc.sql
+		manual.table.sql = manual.table.sql
+		manual.view.sql = manual.view.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60AC5910-244A-4C78-BAFB-839119E83778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60AC5910-244A-4C78-BAFB-839119E83778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60AC5910-244A-4C78-BAFB-839119E83778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60AC5910-244A-4C78-BAFB-839119E83778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D61E6DE-FC10-4EB7-8D1A-6538C3D247A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D61E6DE-FC10-4EB7-8D1A-6538C3D247A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D61E6DE-FC10-4EB7-8D1A-6538C3D247A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D61E6DE-FC10-4EB7-8D1A-6538C3D247A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC33DEF5-2A46-4185-8229-0D14F0034364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC33DEF5-2A46-4185-8229-0D14F0034364}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC33DEF5-2A46-4185-8229-0D14F0034364}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC33DEF5-2A46-4185-8229-0D14F0034364}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C428B16-98E2-4C0D-9021-5500A64405BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C428B16-98E2-4C0D-9021-5500A64405BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C428B16-98E2-4C0D-9021-5500A64405BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C428B16-98E2-4C0D-9021-5500A64405BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
