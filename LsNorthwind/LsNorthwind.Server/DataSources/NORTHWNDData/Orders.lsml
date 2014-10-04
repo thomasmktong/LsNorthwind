@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Order">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="OrderID"
+        IsReadOnly="True"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="OrderDate"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="RequiredDate"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="ShippedDate"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Freight"
+        PropertyType=":Decimal?">
+        <EntityProperty.Attributes>
+          <DecimalConstraint
+            Precision="19"
+            Scale="4" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="ShipName"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="40" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="ShipAddress"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="60" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="ShipCity"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="15" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="ShipRegion"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="15" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="ShipPostalCode"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="10" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="ShipCountry"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="15" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="Order_Details"
+        Association="FK_Order_Details_Orders"
+        FromEnd="Orders"
+        ToEnd="Order_Details" />
+      <NavigationProperty
+        Name="Customer"
+        Association="FK_Orders_Customers"
+        FromEnd="Orders"
+        ToEnd="Customers" />
+      <NavigationProperty
+        Name="Employee"
+        Association="FK_Orders_Employees"
+        FromEnd="Orders"
+        ToEnd="Employees" />
+      <NavigationProperty
+        Name="Shipper"
+        Association="FK_Orders_Shippers"
+        FromEnd="Orders"
+        ToEnd="Shippers" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Order_Details_Orders">
+    <AssociationEnd
+      Name="Orders"
+      Multiplicity="One"
+      EntityType="Order">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Order_Details"
+      Multiplicity="Many"
+      EntityType="Order_Detail" />
+  </Association>
+  <EntityContainer
+    Name="NORTHWNDData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      Name="Orders"
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Order" />
+    <AssociationSet
+      Name="FK_Order_Details_Orders"
+      Association="FK_Order_Details_Orders">
+      <AssociationSetEnd
+        Name="Orders"
+        EntitySet="Orders" />
+      <AssociationSetEnd
+        Name="Order_Details"
+        EntitySet="Order_Details" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Orders_Single"
+      ReturnType="Order">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="OrderID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="OrderID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Orders" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="OrderID"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'OrderID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Orders_SingleOrDefault"
+      ReturnType="Order">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="OrderID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="OrderID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Orders" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="OrderID"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'OrderID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="NORTHWNDDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Orders">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Orders" />
+        <SsdlProperty
+          Name="OrderID"
+          Nullable="False"
+          StoreGeneratedPattern="Identity"
+          Type="int"
+          Property="Order/Properties[OrderID]" />
+        <SsdlProperty
+          Name="OrderDate"
+          Nullable="True"
+          Type="datetime"
+          Property="Order/Properties[OrderDate]" />
+        <SsdlProperty
+          Name="RequiredDate"
+          Nullable="True"
+          Type="datetime"
+          Property="Order/Properties[RequiredDate]" />
+        <SsdlProperty
+          Name="ShippedDate"
+          Nullable="True"
+          Type="datetime"
+          Property="Order/Properties[ShippedDate]" />
+        <SsdlProperty
+          Name="Freight"
+          Nullable="True"
+          Type="money"
+          Property="Order/Properties[Freight]" />
+        <SsdlProperty
+          MaxLength="40"
+          Name="ShipName"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Order/Properties[ShipName]" />
+        <SsdlProperty
+          MaxLength="60"
+          Name="ShipAddress"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Order/Properties[ShipAddress]" />
+        <SsdlProperty
+          MaxLength="15"
+          Name="ShipCity"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Order/Properties[ShipCity]" />
+        <SsdlProperty
+          MaxLength="15"
+          Name="ShipRegion"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Order/Properties[ShipRegion]" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="ShipPostalCode"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Order/Properties[ShipPostalCode]" />
+        <SsdlProperty
+          MaxLength="15"
+          Name="ShipCountry"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Order/Properties[ShipCountry]" />
+        <SsdlForeignKeyProperty
+          MaxLength="5"
+          Name="CustomerID"
+          Nullable="True"
+          Type="nchar"
+          PropertyName="CustomerID" />
+        <SsdlForeignKeyProperty
+          Name="EmployeeID"
+          Nullable="True"
+          Type="int"
+          PropertyName="EmployeeID" />
+        <SsdlForeignKeyProperty
+          Name="ShipVia"
+          Nullable="True"
+          Type="int"
+          PropertyName="ShipVia" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Order_Details_Orders">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Order_Details_Orders" />
+        <SsdlAssociationSetEnd
+          End="NORTHWNDData/Members[FK_Order_Details_Orders]/Members[Orders]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="NORTHWNDData/Members[FK_Order_Details_Orders]/Members[Order_Details]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

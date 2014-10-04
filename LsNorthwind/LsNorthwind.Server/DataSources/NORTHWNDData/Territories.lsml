@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Territory">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="TerritoryID"
+        PropertyType=":String">
+        <KeyProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="20" />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="TerritoryDescription"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            IsFixedLength="True"
+            Value="50" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="EmployeeTerritories"
+        Association="FK_EmployeeTerritories_Territories"
+        FromEnd="Territories"
+        ToEnd="EmployeeTerritories" />
+      <NavigationProperty
+        Name="Region"
+        Association="FK_Territories_Region"
+        FromEnd="Territories"
+        ToEnd="Region" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_EmployeeTerritories_Territories">
+    <AssociationEnd
+      Name="Territories"
+      Multiplicity="One"
+      EntityType="Territory">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="EmployeeTerritories"
+      Multiplicity="Many"
+      EntityType="EmployeeTerritory" />
+  </Association>
+  <EntityContainer
+    Name="NORTHWNDData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      Name="Territories"
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Territory" />
+    <AssociationSet
+      Name="FK_EmployeeTerritories_Territories"
+      Association="FK_EmployeeTerritories_Territories">
+      <AssociationSetEnd
+        Name="Territories"
+        EntitySet="Territories" />
+      <AssociationSetEnd
+        Name="EmployeeTerritories"
+        EntitySet="EmployeeTerritories" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Territories_Single"
+      ReturnType="Territory">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="TerritoryID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="TerritoryID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Territories" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="TerritoryID"
+        ParameterType="Microsoft.LightSwitch:String?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'TerritoryID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Territories_SingleOrDefault"
+      ReturnType="Territory">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="TerritoryID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="TerritoryID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Territories" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="TerritoryID"
+        ParameterType="Microsoft.LightSwitch:String?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'TerritoryID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="NORTHWNDDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Territories">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Territories" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="TerritoryID"
+          Nullable="False"
+          Type="nvarchar"
+          Property="Territory/Properties[TerritoryID]" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="TerritoryDescription"
+          Nullable="False"
+          Type="nchar"
+          Property="Territory/Properties[TerritoryDescription]" />
+        <SsdlForeignKeyProperty
+          Name="RegionID"
+          Nullable="False"
+          Type="int"
+          PropertyName="RegionID" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_EmployeeTerritories_Territories">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_EmployeeTerritories_Territories" />
+        <SsdlAssociationSetEnd
+          End="NORTHWNDData/Members[FK_EmployeeTerritories_Territories]/Members[Territories]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="TerritoryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="NORTHWNDData/Members[FK_EmployeeTerritories_Territories]/Members[EmployeeTerritories]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="TerritoryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

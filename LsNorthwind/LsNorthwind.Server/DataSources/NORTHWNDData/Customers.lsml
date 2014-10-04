@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Customer">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="CustomerID"
+        PropertyType=":String">
+        <KeyProperty.Attributes>
+          <Required />
+          <MaxLength
+            IsFixedLength="True"
+            Value="5" />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="CompanyName"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="40" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="ContactName"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="30" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="ContactTitle"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="30" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Address"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="60" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="City"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="15" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Region"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="15" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="PostalCode"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="10" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Country"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="15" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Phone"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="24" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Fax"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="24" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="CustomerCustomerDemoes"
+        Association="FK_CustomerCustomerDemo_Customers"
+        FromEnd="Customers"
+        ToEnd="CustomerCustomerDemo" />
+      <NavigationProperty
+        Name="Orders"
+        Association="FK_Orders_Customers"
+        FromEnd="Customers"
+        ToEnd="Orders" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_CustomerCustomerDemo_Customers">
+    <AssociationEnd
+      Name="Customers"
+      Multiplicity="One"
+      EntityType="Customer">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="CustomerCustomerDemo"
+      Multiplicity="Many"
+      EntityType="CustomerCustomerDemo" />
+  </Association>
+  <Association
+    Name="FK_Orders_Customers">
+    <AssociationEnd
+      Name="Customers"
+      EntityType="Customer">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Orders"
+      Multiplicity="Many"
+      EntityType="Order" />
+  </Association>
+  <EntityContainer
+    Name="NORTHWNDData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      Name="Customers"
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Customer" />
+    <AssociationSet
+      Name="FK_CustomerCustomerDemo_Customers"
+      Association="FK_CustomerCustomerDemo_Customers">
+      <AssociationSetEnd
+        Name="Customers"
+        EntitySet="Customers" />
+      <AssociationSetEnd
+        Name="CustomerCustomerDemo"
+        EntitySet="CustomerCustomerDemoes" />
+    </AssociationSet>
+    <AssociationSet
+      Name="FK_Orders_Customers"
+      Association="FK_Orders_Customers">
+      <AssociationSetEnd
+        Name="Customers"
+        EntitySet="Customers" />
+      <AssociationSetEnd
+        Name="Orders"
+        EntitySet="Orders" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Customers_Single"
+      ReturnType="Customer">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="CustomerID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="CustomerID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Customers" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="CustomerID"
+        ParameterType="Microsoft.LightSwitch:String?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'CustomerID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Customers_SingleOrDefault"
+      ReturnType="Customer">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="CustomerID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="CustomerID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Customers" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="CustomerID"
+        ParameterType="Microsoft.LightSwitch:String?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'CustomerID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="NORTHWNDDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Customers">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Customers" />
+        <SsdlProperty
+          MaxLength="5"
+          Name="CustomerID"
+          Nullable="False"
+          Type="nchar"
+          Property="Customer/Properties[CustomerID]" />
+        <SsdlProperty
+          MaxLength="40"
+          Name="CompanyName"
+          Nullable="False"
+          Type="nvarchar"
+          Property="Customer/Properties[CompanyName]" />
+        <SsdlProperty
+          MaxLength="30"
+          Name="ContactName"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Customer/Properties[ContactName]" />
+        <SsdlProperty
+          MaxLength="30"
+          Name="ContactTitle"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Customer/Properties[ContactTitle]" />
+        <SsdlProperty
+          MaxLength="60"
+          Name="Address"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Customer/Properties[Address]" />
+        <SsdlProperty
+          MaxLength="15"
+          Name="City"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Customer/Properties[City]" />
+        <SsdlProperty
+          MaxLength="15"
+          Name="Region"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Customer/Properties[Region]" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="PostalCode"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Customer/Properties[PostalCode]" />
+        <SsdlProperty
+          MaxLength="15"
+          Name="Country"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Customer/Properties[Country]" />
+        <SsdlProperty
+          MaxLength="24"
+          Name="Phone"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Customer/Properties[Phone]" />
+        <SsdlProperty
+          MaxLength="24"
+          Name="Fax"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Customer/Properties[Fax]" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_CustomerCustomerDemo_Customers">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_CustomerCustomerDemo_Customers" />
+        <SsdlAssociationSetEnd
+          End="NORTHWNDData/Members[FK_CustomerCustomerDemo_Customers]/Members[Customers]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CustomerID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="NORTHWNDData/Members[FK_CustomerCustomerDemo_Customers]/Members[CustomerCustomerDemo]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CustomerID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Orders_Customers">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Orders_Customers" />
+        <SsdlAssociationSetEnd
+          End="NORTHWNDData/Members[FK_Orders_Customers]/Members[Customers]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CustomerID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="NORTHWNDData/Members[FK_Orders_Customers]/Members[Orders]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CustomerID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Employee">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="EmployeeID"
+        IsReadOnly="True"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="LastName"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="20" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="FirstName"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="10" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Title"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="30" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="TitleOfCourtesy"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="25" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="BirthDate"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="HireDate"
+        PropertyType=":DateTime?">
+        <EntityProperty.Attributes>
+          <DateTimeConstraint
+            Precision="3"
+            PreserveSeconds="True" />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Address"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="60" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="City"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="15" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Region"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="15" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="PostalCode"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="10" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Country"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="15" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="HomePhone"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="24" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Extension"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="4" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Photo"
+        PropertyType=":Binary?">
+        <EntityProperty.Attributes>
+          <NotSortable />
+          <MaxLength />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Notes"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <NotSortable />
+          <MaxLength />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="PhotoPath"
+        PropertyType=":String?">
+        <EntityProperty.Attributes>
+          <MaxLength
+            Value="255" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="Employees"
+        Association="FK_Employees_Employees"
+        FromEnd="Employees"
+        ToEnd="Employees1" />
+      <NavigationProperty
+        Name="Employee1"
+        Association="FK_Employees_Employees"
+        FromEnd="Employees1"
+        ToEnd="Employees" />
+      <NavigationProperty
+        Name="EmployeeTerritories"
+        Association="FK_EmployeeTerritories_Employees"
+        FromEnd="Employees"
+        ToEnd="EmployeeTerritories" />
+      <NavigationProperty
+        Name="Orders"
+        Association="FK_Orders_Employees"
+        FromEnd="Employees"
+        ToEnd="Orders" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Employees_Employees">
+    <AssociationEnd
+      Name="Employees"
+      EntityType="Employee">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Restrict" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Employees1"
+      Multiplicity="Many"
+      EntityType="Employee" />
+  </Association>
+  <Association
+    Name="FK_EmployeeTerritories_Employees">
+    <AssociationEnd
+      Name="Employees"
+      Multiplicity="One"
+      EntityType="Employee">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="EmployeeTerritories"
+      Multiplicity="Many"
+      EntityType="EmployeeTerritory" />
+  </Association>
+  <Association
+    Name="FK_Orders_Employees">
+    <AssociationEnd
+      Name="Employees"
+      EntityType="Employee">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Orders"
+      Multiplicity="Many"
+      EntityType="Order" />
+  </Association>
+  <EntityContainer
+    Name="NORTHWNDData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      Name="Employees"
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Employee" />
+    <AssociationSet
+      Name="FK_Employees_Employees"
+      Association="FK_Employees_Employees">
+      <AssociationSetEnd
+        Name="Employees"
+        EntitySet="Employees" />
+      <AssociationSetEnd
+        Name="Employees1"
+        EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet
+      Name="FK_EmployeeTerritories_Employees"
+      Association="FK_EmployeeTerritories_Employees">
+      <AssociationSetEnd
+        Name="Employees"
+        EntitySet="Employees" />
+      <AssociationSetEnd
+        Name="EmployeeTerritories"
+        EntitySet="EmployeeTerritories" />
+    </AssociationSet>
+    <AssociationSet
+      Name="FK_Orders_Employees"
+      Association="FK_Orders_Employees">
+      <AssociationSetEnd
+        Name="Employees"
+        EntitySet="Employees" />
+      <AssociationSetEnd
+        Name="Orders"
+        EntitySet="Orders" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Employees_Single"
+      ReturnType="Employee">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="EmployeeID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="EmployeeID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Employees" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="EmployeeID"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'EmployeeID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Employees_SingleOrDefault"
+      ReturnType="Employee">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="EmployeeID" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="EmployeeID" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Employees" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="EmployeeID"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'EmployeeID' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="NORTHWNDDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Employees">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Employees" />
+        <SsdlProperty
+          Name="EmployeeID"
+          Nullable="False"
+          StoreGeneratedPattern="Identity"
+          Type="int"
+          Property="Employee/Properties[EmployeeID]" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="LastName"
+          Nullable="False"
+          Type="nvarchar"
+          Property="Employee/Properties[LastName]" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="FirstName"
+          Nullable="False"
+          Type="nvarchar"
+          Property="Employee/Properties[FirstName]" />
+        <SsdlProperty
+          MaxLength="30"
+          Name="Title"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Employee/Properties[Title]" />
+        <SsdlProperty
+          MaxLength="25"
+          Name="TitleOfCourtesy"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Employee/Properties[TitleOfCourtesy]" />
+        <SsdlProperty
+          Name="BirthDate"
+          Nullable="True"
+          Type="datetime"
+          Property="Employee/Properties[BirthDate]" />
+        <SsdlProperty
+          Name="HireDate"
+          Nullable="True"
+          Type="datetime"
+          Property="Employee/Properties[HireDate]" />
+        <SsdlProperty
+          MaxLength="60"
+          Name="Address"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Employee/Properties[Address]" />
+        <SsdlProperty
+          MaxLength="15"
+          Name="City"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Employee/Properties[City]" />
+        <SsdlProperty
+          MaxLength="15"
+          Name="Region"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Employee/Properties[Region]" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="PostalCode"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Employee/Properties[PostalCode]" />
+        <SsdlProperty
+          MaxLength="15"
+          Name="Country"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Employee/Properties[Country]" />
+        <SsdlProperty
+          MaxLength="24"
+          Name="HomePhone"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Employee/Properties[HomePhone]" />
+        <SsdlProperty
+          MaxLength="4"
+          Name="Extension"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Employee/Properties[Extension]" />
+        <SsdlProperty
+          Name="Photo"
+          Nullable="True"
+          Type="image"
+          Property="Employee/Properties[Photo]" />
+        <SsdlProperty
+          Name="Notes"
+          Nullable="True"
+          Type="ntext"
+          Property="Employee/Properties[Notes]" />
+        <SsdlProperty
+          MaxLength="255"
+          Name="PhotoPath"
+          Nullable="True"
+          Type="nvarchar"
+          Property="Employee/Properties[PhotoPath]" />
+        <SsdlForeignKeyProperty
+          Name="ReportsTo"
+          Nullable="True"
+          Type="int"
+          PropertyName="ReportsTo" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Employees_Employees">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Employees_Employees" />
+        <SsdlAssociationSetEnd
+          End="NORTHWNDData/Members[FK_Employees_Employees]/Members[Employees]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="EmployeeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="NORTHWNDData/Members[FK_Employees_Employees]/Members[Employees1]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ReportsTo" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_EmployeeTerritories_Employees">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_EmployeeTerritories_Employees" />
+        <SsdlAssociationSetEnd
+          End="NORTHWNDData/Members[FK_EmployeeTerritories_Employees]/Members[Employees]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="EmployeeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="NORTHWNDData/Members[FK_EmployeeTerritories_Employees]/Members[EmployeeTerritories]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="EmployeeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Orders_Employees">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Orders_Employees" />
+        <SsdlAssociationSetEnd
+          End="NORTHWNDData/Members[FK_Orders_Employees]/Members[Employees]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="EmployeeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="NORTHWNDData/Members[FK_Orders_Employees]/Members[Orders]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="EmployeeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

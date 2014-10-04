@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DatabaseServer" description="Name of the server that hosts the application database. Must match the server specified in the connection string." defaultValue="" tags="SQL" />
+  <parameter name="DatabaseName" description="Name of the application database. Must match the database specified in the connection string." defaultValue="LIGHTSWITCH" tags="SQL" />
+  <parameter name="DatabaseUserName" description="User name that the application will use to connect to the application database." defaultValue="" tags="SQL" />
+  <parameter name="DatabaseUserPassword" description="Password for the database user name." defaultValue="" tags="SQL,Password,New" />
+  <parameter name="Update web.config connection string" description="" defaultValue="Data Source={DatabaseServer};Database={DatabaseName};uid={DatabaseUserName};Pwd={DatabaseUserPassword};" tags="Hidden">
+    <parameterEntry kind="XmlFile" scope="web.config" match="//connectionStrings/add[@name='_IntrinsicData']/@connectionString" />
+  </parameter>
+  <parameter name="LsNorthwind_IisWebApplication" description="IIS Web Application content location" defaultValue="Default Web Site/LsNorthwind" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Administrator\\documents\\visual\ studio\ 2013\\Projects\\LsNorthwind\\LsNorthwind\\bin\\Debug\\app\.publish\\$" />
+  </parameter>
+  <parameter name="NORTHWNDData" description="Configure the ConnectionString" defaultValue="data source=localhost;initial catalog=NORTHWND;user id=lightswitch;password=lightswitch" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="web.config" match="/configuration/connectionStrings/add[@name='NORTHWNDData']/@connectionString" />
+  </parameter>
+</parameters>
